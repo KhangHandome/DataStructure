@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+/* Create a struct data */
 typedef struct
 {
     /* data */
@@ -13,6 +14,7 @@ typedef struct
     float AverageScore;
 } Data_t;
 
+/*Create a type of Linked Data*/
 typedef struct 
 {
     Data_t myStudent;
@@ -25,9 +27,15 @@ typedef struct
 /* Show all elements in the Node */
 /* Delete a node in Linked List by the element */
 /* Sort LinkedList by the condition */
-
+static void AddToFirstNode(LinkedList **myList);
+static void AddToEndNode(LinkedList **myList);
+static void ShowAllElementInNode(LinkedList *myList);
+static void ShowElementByCondition(LinkedList **myList);
+static void DeleteAnElementByIndex(LinkedList **myList);
 int main()
 {
+
     printf("This code is an example about how to used a LinkedList in C \n");
     printf("It was creare by MaiThanhKhang \n");
+
 }
