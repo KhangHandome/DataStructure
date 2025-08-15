@@ -37,14 +37,52 @@ int main()
     LinkedList* myStudent = NULL;
     printf("This code is an example about how to used a LinkedList in C \n");
     printf("It was creare by MaiThanhKhang \n");
-    AddToEndNode(&myStudent);
-    AddToEndNode(&myStudent);
-    AddToEndNode(&myStudent);
-    AddToEndNode(&myStudent);
+    AddToFirstNode(&myStudent);
+    AddToFirstNode(&myStudent);
+    AddToFirstNode(&myStudent);
+    AddToFirstNode(&myStudent);
     ShowAllElementInNode(myStudent);
 
 }
+static void AddToFirstNode(LinkedList **myList)
+{
+    LinkedList *newNode = NULL;
+    LinkedList *tmp     = *myList;
+    Data_t newData ;
+    uint8_t c = 0 ;
 
+    printf("Press the Student ID    : ");
+    fgets(newData.StudentID, sizeof(newData.StudentID), stdin);
+    printf("Press the Student name  : ");
+    fgets(newData.StudentName, sizeof(newData.StudentName), stdin);
+    printf("Press the Math Score    : ");
+    scanf("%f",&newData.MathScore);
+    printf("Press the Poet Score    : ");
+    scanf("%f",&newData.PoetSocre);
+    printf("Press the English Score : ");
+    scanf("%f",&newData.EnglishScore);
+    while ((c = getchar()) != '\n' && c != EOF) { }
+    newData.AverageScore = (newData.MathScore + newData.EnglishScore + newData.PoetSocre) / 3 ; 
+    newNode = (LinkedList *) malloc( sizeof(LinkedList));
+    newNode->myStudent = newData;
+    if(*myList == NULL)
+    {
+        printf("There is no element in the node, creating a new node \n");
+        newNode->next = NULL;
+        (*myList) = newNode;
+    }
+    else
+    {
+        printf("Adding a new alement in to the node \n");
+        newNode->next = NULL ; 
+        while( tmp->next !=NULL )
+        {
+            tmp = (LinkedList*) tmp->next;
+        }
+        tmp->next = (struct LinkedList*) newNode;
+        newNode->next = NULL ; 
+    }
+}
 static void AddToEndNode(LinkedList **myList)
 {
     LinkedList *newNode = NULL;
