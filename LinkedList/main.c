@@ -31,7 +31,7 @@ static void AddToFirstNode(LinkedList **myList);
 static void AddToEndNode(LinkedList **myList);
 static void ShowAllElementInNode(LinkedList *myList);
 static void SortElementByCondition(LinkedList **myList);
-static void DeleteAnElementByIndex(LinkedList **myList);
+static void DeleteAnElementByIndex(LinkedList **myList,uint8_t index);
 int main()
 {
     LinkedList* myStudent = NULL;
@@ -41,9 +41,14 @@ int main()
     AddToFirstNode(&myStudent);
     AddToFirstNode(&myStudent);
     AddToFirstNode(&myStudent);
+    AddToFirstNode(&myStudent);
+    ShowAllElementInNode(myStudent);
+    DeleteAnElementByIndex(&myStudent,2);
     ShowAllElementInNode(myStudent);
 
+
 }
+
 static void AddToFirstNode(LinkedList **myList)
 {
     LinkedList *newNode = NULL;
@@ -129,5 +134,29 @@ static void ShowAllElementInNode(LinkedList *myList)
         myList = (LinkedList*) myList->next;
     }
     while(myList != NULL);
+
+}
+static void DeleteAnElementByIndex(LinkedList **myList,uint8_t index)
+{
+    uint8_t i = 0 ; 
+    LinkedList* tmp = *myList;
+    LinkedList* nodeToDelete ;
+    printf("Starting delete a node in Node \n");
+    if(index == 0 )
+    {
+        *myList = (LinkedList*) (*myList)->next;
+        free(tmp);
+    }
+    else
+    {
+        for ( i = 0 ; i < index -1 ; i ++)
+        {
+            tmp = (LinkedList*) tmp->next;
+        }
+        tmp->next = ((LinkedList*)(tmp->next))->next ; 
+    }
+    nodeToDelete = (LinkedList*) tmp->next;
+    tmp->next = nodeToDelete->next;
+    free(nodeToDelete);
 
 }
