@@ -40,13 +40,9 @@ int main()
     AddToFirstNode(&myStudent);
     AddToFirstNode(&myStudent);
     AddToFirstNode(&myStudent);
-    AddToFirstNode(&myStudent);
-    AddToFirstNode(&myStudent);
     ShowAllElementInNode(myStudent);
-    DeleteAnElementByIndex(&myStudent,2);
+    SortElementByCondition(&myStudent);
     ShowAllElementInNode(myStudent);
-
-
 }
 
 static void AddToFirstNode(LinkedList **myList)
@@ -153,10 +149,64 @@ static void DeleteAnElementByIndex(LinkedList **myList,uint8_t index)
         {
             tmp = (LinkedList*) tmp->next;
         }
-        tmp->next = ((LinkedList*)(tmp->next))->next ; 
     }
     nodeToDelete = (LinkedList*) tmp->next;
     tmp->next = nodeToDelete->next;
     free(nodeToDelete);
+}
+static void SortElementByCondition(LinkedList **myList)
+{
+    LinkedList *tmp = *myList;
+    LinkedList *g_myList = *myList;
+    uint8_t choice = 0 ; 
+    uint8_t numOfElements  = 0 ; 
+    uint8_t i = 0 ; 
+    uint8_t j = 0 ;
+    printf("Press your choise : ");
+    printf("1 .Sort by math score    ");
+    printf("2 .Sort by poet score    ");
+    printf("3 .Sort by english score ");
+    printf("4 .Sort by average score ");
+    scanf("%c",&choice);
+    while (g_myList != NULL)
+    {
+        /* code */        numOfElements ++ ; 
+        g_myList = (LinkedList*) g_myList->next;
+    }
+    g_myList = *myList;
+    switch (choice)
 
+    {
+        case '1': 
+            if (*myList == NULL || (*myList)->next == NULL) {
+                printf("Danh sach rong hoac chi co 1 phan tu, khong can sap xep.\n");
+                break;
+            }
+            int swapped;
+            LinkedList **ptr;
+            do {
+                swapped = 0;
+                ptr = myList; // con trỏ trỏ tới con trỏ đầu danh sách
+
+                while ((*ptr) != NULL && (*ptr)->next != NULL) {
+                    g_myList = *ptr;
+                    tmp = g_myList->next;
+                    if (g_myList->myStudent.MathScore > tmp->myStudent.MathScore) {
+                        // Hoán đổi liên kết
+                        g_myList->next = tmp->next;
+                        tmp->next = g_myList;
+                        *ptr = tmp;
+                        swapped = 1;
+                    }
+                    ptr = &((*ptr)->next); // tiến con trỏ tới cặp tiếp theo
+                }
+            } while (swapped);
+
+            printf("Sap xep hoan tat (theo lien ket node).\n");
+            break ; 
+        case '2': break ; 
+        case '3': break ; 
+        case '4': break ; 
+        default: printf("Error");
+    }
 }
