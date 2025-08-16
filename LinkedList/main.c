@@ -150,9 +150,13 @@ static void DeleteAnElementByIndex(LinkedList **myList,uint8_t index)
             tmp = (LinkedList*) tmp->next;
         }
     }
+    /* Select node to delete */
     nodeToDelete = (LinkedList*) tmp->next;
+    /* Update node */
     tmp->next = nodeToDelete->next;
-    free(nodeToDelete);
+    /* Delete to free memory and advoid memory leak */
+    free(nodeToDelete); 
+    /* You cannot delete node by ( tmp->next) because it will be in use case memory leak */
 }
 static void SortElementByCondition(LinkedList **myList)
 {
